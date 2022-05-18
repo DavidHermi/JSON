@@ -15,7 +15,7 @@ public class Main {
 
         // creamos la petición
         HttpRequest request = HttpRequest.newBuilder()
-                .uri(new URI("https://jsonplaceholder.typicode.com/todos/1"))
+                .uri(new URI("https://api.openweathermap.org/data/2.5/weather?q=vigo&appid=214d3edca1f88b6812bfef609598d5aa"))
                 .GET()
                 .build();
 
@@ -28,7 +28,7 @@ public class Main {
         // Mostramos el cuerpo de la respuesta
         System.out.println(response.body());
 
-        /*String cadenaJSON = "";
+       /* String cadenaJSON = "";
         JSONObject obj = new JSONObject(cadenaJSON);
 
         String vivo = obj.getJSONObject("pageInfo").getString("pageName");
@@ -39,6 +39,8 @@ public class Main {
             System.out.println(post_id);
         }
 
-        System.out.println(vivo);*/
+        System.out.println(vivo);
+    }
+*/
     }
 }
