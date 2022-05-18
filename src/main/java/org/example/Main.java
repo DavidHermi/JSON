@@ -1,3 +1,5 @@
+package org.example;
+
 import org.json.JSONArray;
 import org.json.JSONObject;
 
@@ -8,7 +10,7 @@ import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 
-public class EjemploParse {
+public class Main {
     public static void main(String args[]) throws URISyntaxException, IOException, InterruptedException {
 
         // creamos la petición
