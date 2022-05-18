@@ -1,48 +1,42 @@
-package org.example;
 import org.json.JSONArray;
 import org.json.JSONObject;
-public class Main {
-    public static void main(String[] args) {
 
+import java.io.IOException;
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.net.http.HttpClient;
+import java.net.http.HttpRequest;
+import java.net.http.HttpResponse;
 
-        String json = "{\n" +
-                "    \"pageInfo\": {\n" +
-                "            \"pageName\": \"Homepage\",\n" +
-                "            \"logo\": \"https://www.example.com/logo.jpg\"\n" +
-                "    },\n" +
-                "    \"posts\": [\n" +
-                "            {\n" +
-                "                \"post_id\": \"0123456789\",\n" +
-                "                \"actor_id\": \"1001\",\n" +
-                "                \"author_name\": \"Jane Doe\",\n" +
-                "                \"post_title\": \"How to parse JSON in Java\",\n" +
-                "                \"comments\": [],\n" +
-                "                \"time_of_post\": \"1234567890\"\n" +
-                "            }," +
-                "  {\\n\" +" +
-                "                \"                \\\"post_id2\\\": \\\"0123456789\\\",\\n\" +\n" +
-                "                \"                \\\"actor_id\\\": \\\"1001\\\",\\n\" +\n" +
-                "                \"                \\\"author_name\\\": \\\"Jane Doe\\\",\\n\" +\n" +
-                "                \"                \\\"post_title\\\": \\\"How to parse JSON in Java\\\",\\n\" +\n" +
-                "                \"                \\\"comments\\\": [Muy bien hecho],\\n\" +\n" +
-                "                \"                \\\"time_of_post\\\": \\\"1234567890\\\"\\n\" +\n" +
-                "                \"            }\\n\"\n"
-                +
-                "    ]\n" +
-                "}" ;
-            JSONObject obj = new JSONObject(json);
-            String pageName = obj.getJSONObject("pageInfo").getString("pageName");
+public class EjemploParse {
+    public static void main(String args[]) throws URISyntaxException, IOException, InterruptedException {
 
-            System.out.println(pageName);
+        // creamos la petición
+        HttpRequest request = HttpRequest.newBuilder()
+                .uri(new URI("https://jsonplaceholder.typicode.com/todos/1"))
+                .GET()
+                .build();
 
-            JSONArray arr = obj.getJSONArray("posts");
-            for (int i = 0; i < arr.length(); i++) {
-                String post_id = arr.getJSONObject(i).getString("post_id");
-                System.out.println(post_id);
-            }
+        // creamos el cliente
+        HttpClient client = HttpClient.newHttpClient();
+
+        // Enviamos la petición y obtenemos la respuesta
+        HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
+
+        // Mostramos el cuerpo de la respuesta
+        System.out.println(response.body());
+
+        /*String cadenaJSON = "";
+        JSONObject obj = new JSONObject(cadenaJSON);
+
+        String vivo = obj.getJSONObject("pageInfo").getString("pageName");
+
+        JSONArray arr = obj.getJSONArray("posts");
         for (int i = 0; i < arr.length(); i++) {
-            String post_id = arr.getJSONObject(i).getString("post_id2");
+            String post_id = arr.getJSONObject(i).getString("post_id");
             System.out.println(post_id);
         }
-        }
+
+        System.out.println(vivo);*/
     }
+}
